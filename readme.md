@@ -61,7 +61,7 @@ Just by looking at videos people have taken from their displays, tearing as a pr
 
 ---
 
-### state-of-the-art character display capabilities
+### State-of-the-art character display capabilities
 
 The 2013 [hedelmae LCD megademo 2](https://www.youtube.com/watch?v=nxFad7Rxw7Q) is among the noteworthy examples of what is possible at the time of this writing.
 The appetite for graphic memory access is perhaps best visible through the widespread fascination hobbyists and demoscene people have with the measly 8 custom characters available in all controllers. This well-documented feature is used by writing character code 0x00 .. 0x07 into DDRAM. The controller then gets pixel data from CGRAM and uses it analogous to CGROM data.
@@ -89,7 +89,7 @@ If one could swap out a character before each line were serialized and sent to t
 
 ![](img/lut_bit_patterns.png)
 
-The LUT thus consists of 32x8 (256) characters, many of which can be matched to the existing font set:
+The LUT thus consists of 32x8 (256) character codes, many of which can be matched to the existing font set:
 
 ![](img/lut_filled_from_CGROM.png)
 
