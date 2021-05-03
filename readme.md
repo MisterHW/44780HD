@@ -116,7 +116,7 @@ The order in which LUT codes need to be written to CGRAM is dictated by the orde
 
 --- 
 
-### Synchronization
+### Timing
 
 To investigate whether there is a window of opportunity to write LUT codes into DDRAM and to reset the DDRAM cursor periodically and synchronized to the bit pattern generation, an reduced section of the functional block diagram from the  [HD44780 datasheet](datasheets/controller/HD44780.pdf) is presented below.
 
@@ -131,6 +131,10 @@ The functional description on p.9 gives away a few, but not all details:
 * BUSY is active during execution of commands, and new instructions issued while BUSY == active are ignored
 * DDRAM addresses come from the instruction decoder, not from the timing generator. The 8 bit data bus is necessarily controlled by the MPU (or instruction decoder).
 * 4-bit line positions (0..7 for 5x8 characters, 0..10 for 5x11) need to come from the timing generator, as the memory outputs are only 5 bit wide towards the serializer.
+
+The timing generator and MPU need to be synchronized to ensure appropriate phasing of data transfers into the serializer unit. Some arrows are rather hand-waivy. The more familiar "reset" signal doesn't point to anything in particular, and it is implied that it connects to multiple blocks. Both "Instruction decoder" arrows have an unspecified bit width, but they're not 1 bit wide (not plausible for address data to counter). So essentially there is a possibility that multiple lines are routed to the Timing Generator block, allowing an operation to reset the Timing Generator. Hopefully DISPLAY ON/OFF triggers such a reset.
+ 
+![](img/HD44780_handwaiving_arrows.png)
 
 
 #### Implications
