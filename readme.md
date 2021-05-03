@@ -153,7 +153,7 @@ Furthermore, when injecting data into the serial interface to the daisy-chained 
 
 ### Expanding to 4x20 characters with serial data
 
-Presenting pixel data to extension drivers only, and also using them for row driving, seems to have been a product reality around 1985, as the picture below shared by [AVRFreaks user ossi](file:///C:/projekte/20210428%2044780HD/misc/LCD%20with%20HD44100%20only%20AVR%20Freaks.htm) evidences:
+Presenting pixel data to extension drivers only, and also using them for row driving, seems to have been a product reality around 1985, as the picture below shared by [AVRFreaks user ossi](https://www.avrfreaks.net/forum/lcd-hd44100-only) evidences:
 ![](img/lcd1a.jpg)
 
 so there really should be nothing holding us back morally from modifying modern displays for pixel data injection synchronous to a clock provided by a controller.
