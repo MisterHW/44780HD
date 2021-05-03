@@ -136,6 +136,8 @@ The timing generator and MPU need to be synchronized to ensure appropriate phasi
  
 ![](img/HD44780_handwaiving_arrows.png)
 
+Other datasheets are even less clear about the actual function or existence of Instruction Decoder outputs and interconnectedness. Maybe a die shot would help to clarify.
+
 
 #### Implications
 
@@ -154,6 +156,8 @@ The MPU is thus twice as fast when transferring the data as one could write it i
 ### Synchronization
 
 Furthermore, when injecting data into the serial interface to the daisy-chained extension drivers, only 8 characters + 1 command byte need to be written, further relaxing the timing and creating leeway for "software" synchronization. The latter relies on the assumption that a DISPLAY ON/OFF command resets the row counter in the timing generator. HD44780-like controllers offer an external clock option for jitter- and drift-free operation, but adding wires for extension driver CL1, CL2, M and D lines seems a lot more useful. The timing seems to be too critical to rely on RC oscillator accuracy anyway, and even though that makes it an invasive modification, it is being rewarded with a pathway to 4x20 character graphic mode.
+
+With a 4k7 resistor placed over a cut through the D line between main controller and the first auxiliary driver, a GPIO can be connected on the driver side for bidirectional I/O. CGROM or custom characters can then be read as they are being sent out to column drivers and synchronized to, before the GPIO is switched to push-pull mode, taking over the role as pixel data source.
 
 ### Expanding to 4x20 characters with serial data
 
