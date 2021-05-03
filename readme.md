@@ -33,7 +33,7 @@ The display panel is organized in rows driven by the controller COMs, while colu
 
 The driving scheme for passive matrix displays depends on the arrangement of character groups and format (e.g. 5x8, 5x10, 5x11), but is most often seen to be 1:16-multiplexed with 1/5 level bias.
 
-The 1:2 multiplex scheme below (taken from the NXP PCF2119 datasheet) conveys the idea in a more accessible fashion. [STN](http://dx.doi.org/10.1146/annurev.matsci.27.1.555) Pixels at the junction of row and column conductor stripes see a differential AC waveform. Small amplitudes don't cause a pixel to switch, and in this case pairs of frames must be generated complementarily to average out DC contributions.
+The 1:2 multiplex scheme below (taken from the NXP PCF2119 datasheet) conveys the idea in a more accessible fashion. [STN](http://dx.doi.org/10.1146/annurev.matsci.27.1.555) pixels at the junction of row and column conductor stripes see a differential AC waveform. Small amplitudes don't cause a pixel to switch, and in this case, pairs of frames must be generated complementarily to create a zero time average (no DC component).
 
 
 ![](img/PCF2119x_1-2_multiplexing_scheme.PNG)
@@ -43,7 +43,7 @@ With this in mind, the timing for a display with 1:16 multiplexing and 1/5 bias 
 
 ![](img/SPLC870C_1-16_multiplexing_timing.PNG)
 
-Although HD44780-like controllers have an 8 bit parallel interface, the instruction decoding and memory access logic appears to be such that one command takes at least 37 µs at 270 kHz nominal clock speed, or 10 clock cycles. The write cursor (pointer) is incremented when a write command is performed, so at least one address update needs to precede or follow a burst character write operation. writing a 16 consecutive characters costs 170 clocks, writing a 8x2 character region costs at least 180 clocks, highlighting the limitations of what is possible within the time duration of a single-line drive phase of 200 clocks.
+Although HD44780-like controllers have an 8 bit parallel interface, the instruction decoding and memory access logic appears to be such that one command takes at least 37 µs at 270 kHz nominal clock speed, or 10 clock cycles. The write cursor (pointer) is post-incremented when a write command is performed, so at least one address update needs to precede or follow a burst write operation. Writing 16 consecutive characters costs a minimum of 170 clocks. Filling an 8x2 character region costs at least 180 clocks, highlighting the limitations of what is possible within the time duration of a single-line drive phase of 200 clocks.
 
 In terms of organization, 16x2, 20x2 and 20x4 LCDs use additional drivers to add more column lines, which follow a bias scheme like the one discussed above. The application circuit below shows the daisy-chained configuration for up to 20x4 characters:
 
