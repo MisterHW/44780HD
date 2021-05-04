@@ -27,11 +27,11 @@ With minor but not necessarily documented variations, their block diagram contai
 
 ![](img/HD44780_block_diagram.PNG)
 
-where CL1, CL2, D and M are
+where CL1, CL2, D and M are:
 
 ![](img/RW1061_serial_interface.png)
 
-- see ![a more detailed overview](img/driver_cheatsheet.png) for more.
+See [a more detailed overview](img/driver_cheatsheet.png) for more.
 
 The display panel is organized in rows driven by the controller COMs, while columns are driven by controller or auxiliary driver SEG lines. 
 
