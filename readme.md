@@ -159,6 +159,12 @@ We now also know that the MPU has 5 clock cycles to get the CGROM/CGRAM data int
 
 The MPU is thus twice as fast when transferring the data as one could write it into DDRAM. Timing-wise, one needs to start writing right at or behind the internal reading address. Assuming an instruction or data write operation takes 11 clocks, 16 LUT characters + 1 instruction byte can be written and processed, unlocking 16x2 * 5*8 graphics mode. That's 80x16 (1280) pixels, give or take.
 
+#### Not using the LUT altogether
+
+It should also be noted that when limiting oneself to an 8x2 character block and 1/16 multiplexing, DDRAM 0x00 .. 0x07 and 0x40 .. x047 can also be directly filled with custom chracters 0 .. 7. Instead of changing character codes in DDRAM, write operations can update CGRAM patterns in the corresponding custom character lines, creating full pixel access. The second set of rows (COM8..15) start at CGRAM line 0, 1, ... again, making custom characters a just-in-time video buffer.
+
+All characters driven by segment drivers are of course accessed through the serial interface again.
+
 ### Synchronization
 
 Furthermore, when injecting data into the serial interface to the daisy-chained extension drivers, only 8 characters + 1 command byte need to be written, further relaxing the timing and creating leeway for "software" synchronization. The latter relies on the assumption that a DISPLAY ON/OFF command resets the row counter in the timing generator. HD44780-like controllers offer an external clock option for jitter- and drift-free operation, but adding wires for extension driver CL1, CL2, M and D lines seems a lot more useful. The timing seems to be too critical to rely on RC oscillator accuracy anyway, and even though that makes it an invasive modification, it is being rewarded with a pathway to 4x20 character graphic mode.
