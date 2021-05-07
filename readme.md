@@ -118,7 +118,7 @@ The following LUT example depicts how 5x8 graphics content is mapped to 8 LUT ch
 
 ![](img/sequential_LUT_drawing.png)
 
-The order in which LUT codes need to be written to CGRAM is dictated by the ordering of COM lines to the panel. 
+The order in which LUT codes need to be written to DDRAM is dictated by the ordering of COM lines to the panel. 
 
 --- 
 
