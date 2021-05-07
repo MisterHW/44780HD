@@ -165,7 +165,7 @@ Furthermore, when injecting data into the serial interface to the daisy-chained 
 
 With a 4k7 resistor placed over a cut through the D line between main controller and the first auxiliary driver, a GPIO can be connected on the driver side for bidirectional I/O. CGROM or custom characters can then be read as they are being sent out to column drivers and synchronized to, before the GPIO is switched to push-pull mode, taking over the role as pixel data source.
 
-### Expanding to 4x20 characters with serial data
+### Expanding to 20x4 characters with serial data
 
 Presenting pixel data to extension drivers only, and also using them for row driving, seems to have been a product reality around 1985, as the picture below shared by [AVRFreaks user ossi](https://www.avrfreaks.net/forum/lcd-hd44100-only) evidences:
 ![](img/lcd1a.jpg)
