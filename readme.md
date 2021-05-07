@@ -135,7 +135,7 @@ The functional description on p.9 gives away a few, but not all details:
 * the 8 bit interface is a peripheral with buffers
 * inputs are either loaded to DR or IR
 * BUSY is active during execution of commands, and new instructions issued while BUSY == active are ignored
-* DDRAM addresses come from the instruction decoder, not from the timing generator. The 8 bit data bus is necessarily controlled by the MPU (or instruction decoder).
+* DDRAM addresses come from the instruction decoder, as well as from the timing generator (not necessarily indicated in all datasheets). The 8 bit data bus is necessarily controlled by the MPU (or instruction decoder). As the data bus is shared, access is likely to be interleaved. 
 * 4-bit line positions (0..7 for 5x8 characters, 0..10 for 5x11) need to come from the timing generator, as the memory outputs are only 5 bit wide towards the serializer.
 
 The timing generator and MPU need to be synchronized to ensure appropriate phasing of data transfers into the serializer unit. Some arrows are rather hand-waivy. The more familiar "reset" signal doesn't point to anything in particular, and it is implied that it connects to multiple blocks. Both "Instruction decoder" arrows have an unspecified bit width, but they're not 1 bit wide (not plausible for address data to counter). So essentially there is a possibility that multiple lines are routed to the Timing Generator block, allowing an operation to reset the Timing Generator. Hopefully DISPLAY ON/OFF triggers such a reset.
